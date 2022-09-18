@@ -12,19 +12,21 @@ import java.math.BigDecimal;
 public class CurrencyExchangeController {
 
     public static final String PORT = "local.server.port";
+
     @Autowired
     private Environment environment;
+
+    @Autowired
+    private CurrencyExchangeRepository currencyExchangeRepository;
 
     @GetMapping("current-exchange/from/{from}/to/{to}")
     public CurrencyExchange retrieveExchangeValue(@PathVariable String from, @PathVariable String to) {
 
-        CurrencyExchange currencyExchange = new CurrencyExchange();
+        CurrencyExchange currencyExchange = currencyExchangeRepository.findByFromAndTo(from, to);
 
-        currencyExchange.setId(100L);
-        currencyExchange.setFrom(from);
-        currencyExchange.setTo(to);
-        currencyExchange.setConversionMultiple(BigDecimal.valueOf(50));
-        currencyExchange.setEnvironment(environment.getProperty(PORT));
+        if (currencyExchange == null) {
+            throw new RuntimeException("No data found");
+        }
 
         return currencyExchange;
     }
