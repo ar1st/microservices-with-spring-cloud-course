@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient(name = "currency-exchange")
 public interface CurrencyExchangeProxy {
 
-    @GetMapping("current-exchange/from/{from}/to/{to}")
+    @GetMapping("currency-exchange/from/{from}/to/{to}")
     CurrencyConversion retrieveExchangeValue(@PathVariable String from, @PathVariable String to);
 }
