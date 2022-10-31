@@ -7,14 +7,14 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="currency-exchange-service" />
         <module name="currency-conversion-service" />
+        <module name="currency-exchange-service" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="api-gateway" target="17" />
-      <module name="currency-conversion-service" target="1.5" />
-      <module name="currency-exchange-service" target="1.5" />
+      <module name="currency-conversion-service" target="17" />
+      <module name="currency-exchange-service" target="15" />
       <module name="limits-service" target="17" />
       <module name="naming-server" target="17" />
       <module name="spring-cloud-config-server" target="17" />
@@ -23,8 +23,8 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="api-gateway" options="-parameters" />
-      <module name="currency-conversion-service" options="" />
-      <module name="currency-exchange-service" options="" />
+      <module name="currency-conversion-service" options="-parameters" />
+      <module name="currency-exchange-service" options="-parameters" />
       <module name="limits-service" options="-parameters" />
       <module name="naming-server" options="-parameters" />
       <module name="spring-cloud-config-server" options="-parameters" />
