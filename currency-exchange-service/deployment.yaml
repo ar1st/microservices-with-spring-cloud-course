@@ -3,18 +3,12 @@ kind: Deployment
 metadata:
   annotations:
     deployment.kubernetes.io/revision: "1"
-  creationTimestamp: "2022-10-31T17:27:33Z"
-  generation: 1
   labels:
     app: currency-exchange
   name: currency-exchange
   namespace: default
-  resourceVersion: "774360"
-  uid: 0bf3e61c-e7e8-41a4-b561-5074f4d75c10
 spec:
-  progressDeadlineSeconds: 600
   replicas: 2
-  revisionHistoryLimit: 10
   selector:
     matchLabels:
       app: currency-exchange
@@ -25,7 +19,6 @@ spec:
     type: RollingUpdate
   template:
     metadata:
-      creationTimestamp: null
       labels:
         app: currency-exchange
     spec:
@@ -33,70 +26,29 @@ spec:
       - image: 23730/mmv2-currency-exchange-service:0.0.11-SNAPSHOT
         imagePullPolicy: IfNotPresent
         name: mmv2-currency-exchange-service
-        resources: {}
-        terminationMessagePath: /dev/termination-log
-        terminationMessagePolicy: File
-      dnsPolicy: ClusterFirst
       restartPolicy: Always
-      schedulerName: default-scheduler
-      securityContext: {}
-      terminationGracePeriodSeconds: 30
-status:
-  availableReplicas: 1
-  conditions:
-  - lastTransitionTime: "2022-10-31T17:27:48Z"
-    lastUpdateTime: "2022-10-31T17:27:48Z"
-    message: Deployment has minimum availability.
-    reason: MinimumReplicasAvailable
-    status: "True"
-    type: Available
-  - lastTransitionTime: "2022-10-31T17:27:33Z"
-    lastUpdateTime: "2022-10-31T17:27:48Z"
-    message: ReplicaSet "currency-exchange-7984c8754d" has successfully progressed.
-    reason: NewReplicaSetAvailable
-    status: "True"
-    type: Progressing
-  observedGeneration: 1
-  readyReplicas: 1
-  replicas: 1
-  updatedReplicas: 1
-
 ---
   apiVersion: v1
   kind: Service
   metadata:
     annotations:
       cloud.google.com/neg: '{"ingress":true}'
-    creationTimestamp: "2022-10-31T17:28:30Z"
-    finalizers:
-      - service.kubernetes.io/load-balancer-cleanup
     labels:
       app: currency-exchange
     name: currency-exchange
     namespace: default
-    resourceVersion: "775046"
-    uid: 7d21553a-eb90-47a5-889a-87f497fd1666
   spec:
     allocateLoadBalancerNodePorts: true
-    clusterIP: 10.96.14.228
-    clusterIPs:
-      - 10.96.14.228
-    externalTrafficPolicy: Cluster
     internalTrafficPolicy: Cluster
     ipFamilies:
       - IPv4
     ipFamilyPolicy: SingleStack
     ports:
-      - nodePort: 32118
-        port: 8000
+      - port: 8000
         protocol: TCP
         targetPort: 8000
     selector:
       app: currency-exchange
     sessionAffinity: None
     type: LoadBalancer
-  status:
-    loadBalancer:
-      ingress:
-        - ip: 34.118.40.153
 
